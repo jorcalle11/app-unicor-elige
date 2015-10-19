@@ -1,0 +1,20 @@
+<div>
+  <div class="modal-header">
+      <h3 class="text-center">
+        <span>{{viewEventClicked.title}}</span>
+      </h3>
+  </div>
+  <div class="modal-body">
+	  <strong>Fecha</strong> : <span>{{viewEventClicked.start | date:"longDate"}}</span>
+	  <br><strong>Hora</strong> : <span>{{viewEventClicked.start | date:"h:mma"}}</span>
+	  <br><strong>Lugar</strong> : <span>{{viewEventClicked.place}}</span>
+  </div>
+  <div class="modal-footer">
+    <a class="btn btn-info" ng-click="ok()">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn btn-danger" ng-click="ok()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+</div>

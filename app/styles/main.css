@@ -1,0 +1,205 @@
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+body {
+  font-family: 'Montserrat', sans-serif;
+  padding: 0;
+}
+a, a:active, a:hover,a:focus, span, span:active, span:focus,div, div:focus, div:hover{
+    outline: 0;
+}
+ul >li {
+  list-style-type: none;
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+.btn {
+  border-radius: 2px;
+}
+.text-right{
+  text-align: right;
+}
+.left {
+  float: left;
+  top: 0;
+}
+.border{
+  border: 1px solid red;
+}
+.margin-down {
+  margin-bottom: 2em;
+}
+.margin-up {
+  margin-top: .5em;
+}
+.margin-right {
+  margin-right: 0.7em;
+}
+.not-padding{
+  padding: 0;
+}
+.pointer {
+  cursor: pointer;
+}
+.size{
+  font-size: 1.5em;
+}
+.icon_remove:hover {
+  color: #D9534F;
+}
+.icon_edit:hover {
+  color: #31B0D5
+}
+.color-olive-light{
+  color: #BFB3A5;
+}
+.green-light{
+  color:#738C18;
+}
+.blue-marine{
+  color: #23527C
+}
+.background-olive-light{
+   background-color: #EFF2E7;
+}
+.rotate{
+  position: absolute;
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+  -ms-transform: rotate(180deg); /* IE 9 */
+}
+
+.card{
+  display: inline-block;
+  padding: .5em;
+  margin: 0 2% 1em 0;
+  vertical-align: top;
+  width: 31%;
+}
+ul.social-network {
+  font-size: 2em;
+  list-style: none;
+  display: inline;
+  margin-left:0 !important;
+  padding: 0;
+}
+ul.social-network li {
+  display: inline;
+  margin: 0 5px;
+}
+.social-network a.icoFacebook:hover {
+  color:#3B5998;
+}
+.social-network a.icoTwitter:hover {
+  color:#33ccff;
+}
+.social-network a.icoGoogle:hover {
+  color:#BD3518;
+}
+a.socialIcon:hover {
+  color:#44BCDD;
+}
+.container_copy {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 730px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.container_copy>.jumbotron{
+  background-color: white;
+}
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+/* Custom page footer */
+.footer {
+  background-color: #8BC34A;
+  border-top: 2px solid #e5e5e5;
+  padding-top: 19px;
+  color: white;
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+/* login view */
+.form-control {
+    border-radius: 0;
+}
+.center-form {
+  width: 330px;
+  margin: 12% auto;
+}
+.panel {
+  border-color: #cfd9D7;
+  border-radius: 2px;
+  box-shadow: 0 8px 17px rgba(0, 0, 0, .2);
+}
+.panel-body {
+    padding: 15px;
+}
+.panel-footer {
+  background: #fff;
+  overflow: hidden;
+}
+.has-feedback {
+  position: relative;
+}
+.has-feedback .form-control {
+    padding-left: 42.5px;
+}
+.has-feedback .form-control {
+    padding-right: 42.5px;
+}
+.has-feedback .form-control-feedback {
+  top: 0;
+  left: 0;
+  width: 46px;
+  height: 46px;
+  line-height: 46px;
+  color: #555;
+}
+[class^='ion-'] {
+    font-size: 1.2em;
+}
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container_copy {
+    max-width: 730px;
+  }
+
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+}
+

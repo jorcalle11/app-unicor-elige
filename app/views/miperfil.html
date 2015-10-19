@@ -1,0 +1,90 @@
+<div class="container-fluid" ng-if="currentUser.role != 'admin'">
+	<aside class="col-md-4 col-lg-3" ng-init="profile()">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title text-center">Imagen</h3>
+			</div>
+			<div class="panel-body">
+				<div class="text-center" id="divChangeImage">
+					<img src="" id="userAvatar" alt="avatar" ng-src="{{user.image.url}}" class="candidate-avatar">
+					<br>
+					<button class="btn btn-info" ng-click="changeImage()"><span class="ion-camera"></span>&nbsp;&nbsp;Cambiar imagen</button>
+				</div>
+				<form id="changeUserImage" name="updateUserForm">
+					<div id="divUpdateImage" style="display:none;">
+						<input type='file' id="inputUpdateImage" name="image" file-model="user.avatar" /><br>
+						<img id="imagePreview" src="#" class="candidate-avatar" />
+						<br>
+						<div class="text-center" id="divButtonsActions" style="display:none;">
+							<button class="btn btn-danger" ng-click="cancel()"><span class="ion-close"></span></button>&nbsp;&nbsp;
+							<button class="btn btn-success" ng-click="ok()"><span class="ion-checkmark"></span></button>
+						</div>
+					</div>
+					<br>
+					<div class="form-group has-feedback">
+						<label for="displayName">Nombre de Pantalla: </label>
+						<input class="form-control input-lg ng-pristine ng-invalid ng-invalid-required ng-touched" type="text" name="displayName" ng-model="user.displayName" required>
+						<span class="ion-person form-control-feedback"></span>
+					</div>
+					<div class="text-center">
+		        <button type="submit" ng-click="updateUser()" ng-disabled="updateUserForm.$invalid" class="btn btn-lg btn-primary" disabled="disabled">Actualizar Perfil</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</aside>
+	<section class="col-md-8 col-lg-9">
+		<div class="panel panel-default">
+			<div class="panel-heading text-center">
+				Perfil
+			</div>
+			<div class="panel-body">
+				<p><strong>Codigo: </strong>{{user._id}}</p>
+				<p><strong>{{user.identification.type}}: </strong> {{user.identification.number}}</p>
+				<p><strong>email: </strong>{{user.email}}</p>
+				<p><strong>Facultad: </strong>{{user.faculty}}</p>
+				<p><strong>Programa: </strong>{{user.program}}</p>
+				<p><strong>Semestre: </strong>{{user.semester}}</p>
+				<div class="signup-or-separator"><hr></div>
+				<div class="text-center">
+					<h3>Contraseña</h3>
+					<form method="post" ng-submit="updatePassword()" name="profileChangePasswordForm" class="col-md-6 col-sm-6 col-md-offset-3 col-sm-offset-3 ng-pristine ng-invalid ng-invalid-required">
+						<div class="form-group has-feedback">
+							<input class="form-control input-lg ng-pristine ng-invalid ng-invalid-required ng-touched" type="password" name="password" ng-model="currentPassword" placeholder="Contraseña actual" required autofocus>
+							<span class="ion-android-unlock form-control-feedback"></span>
+						</div>
+						<div class="form-group has-feedback">
+							<input class="form-control input-lg ng-pristine ng-invalid ng-invalid-required ng-touched" type="password" name="password" ng-model="changePassword.newPassword" placeholder="Nueva contraseña" required autofocus>
+							<span class="ion-key form-control-feedback"></span>
+						</div>
+						<button type="submit" ng-disabled="profileChangePasswordForm.$invalid" class="btn btn-lg  btn-block btn-success" disabled="disabled">Actualizar contraseña</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<div class="container" ng-if="currentUser.role =='admin'">
+	<aside class="col-md-4 col-lg-3 col-md-offset-4 col-sm-6 col-sm-offset-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title text-center">Mi perfil</h3>
+				</div>
+				<div class="panel-body">
+					<img src="" id="userAvatar" alt="avatar" ng-src="{{currentUser.image.url}}" class="candidate__avatar">
+					<form id="changeUserImage" name="changeImageForm" style="display:none;">
+						<div>
+							<input type='file' id="updateImage" name="image" file-model="updateUser.image"/><br>
+							<img id="imagePreview" src="#" class="candidate__avatar" />
+						</div>
+						<br>
+					</form>
+					<div class="text-center">
+						<h3>{{currentUser.displayName}}</h3>
+						<small>{{currentUser.email}}</small>
+					</div>
+					<br>
+				</div>
+			</div>
+	</aside>
+</div>

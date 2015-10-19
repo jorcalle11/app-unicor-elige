@@ -1,0 +1,38 @@
+<div class="container-fluid">
+	<section class="col-md-7 col-md-offset-1 padding-top">
+		<div class="panel panel-success ">
+			<div class="panel-heading">
+				<h3 class="text-center">Crear Post</h3>
+			</div>
+			<div class="panel-body">
+				<form method="post" ng-submit="createPost()" name="postForm" class="ng-pristine ng-invalid ng-invalid-required">
+					<div class="form-group">
+						<label for="title" class="control-label">Titulo:</label>
+						<input type="text" name="title" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Titulo del post" ng-model="newPost.title" required autofocus>
+					</div>
+		      <div class="form-group">
+		        <label for="image">Imagen:</label>
+		        <input type="file" name ="image" file-model="newPost.image"/>
+		      </div>
+					<div class="form-group">
+					<label for="content" class="control-label">Contenido:</label>
+						<textarea name="content" rows="20" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Escriba aqui el contenido del post" ng-model="newPost.content" required></textarea>
+					</div>
+					<div class="text-center">
+						<button type="submit"  class="btn btn-lg btn-primary" ng-disabled="postForm.$invalid">Publicar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+	<aside class="col-md-3 col-md-offset-1 padding-top">
+		<div class="panel panel-info">
+			<div class="panel-heading text-center">
+				Ten encuenta....
+			</div>
+			<div class="panel-body">
+				<p>No es necesario que agreges una imagen al post, es opcional, sin embargo ten encuenta que si la agregas tu publicación es más llamativa y por ende más leída.</p>
+			</div>
+		</div>
+	</aside>
+</div>

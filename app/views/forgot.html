@@ -1,0 +1,15 @@
+<div class="container_copy">
+  <div class="center-form panel">
+    <div class="panel-body">
+      <h2 class="text-center">¿Has olvidado la contraseña?</h2>
+      <form method="post" ng-submit="findUser()" name="forgotForm" class="ng-pristine ng-invalid ng-invalid-required">
+      	<p class="text-center">Escribe tu dirección de correo en el cual enviaremos las instrucciones para que puedas resetear tu contraseña.</p><br>
+        <div class="form-group has-feedback">
+          <input class="form-control input-lg ng-pristine ng-invalid ng-invalid-required ng-touched" type="email" name="email" ng-model="searchUser.email" placeholder="Email" required autofocus>
+          <span class="ion-at form-control-feedback"></span>
+        </div>
+        <button type="submit" ng-disabled="forgotForm.$invalid" class="btn btn-lg  btn-block btn-success" disabled="disabled">Resetear Contraseña</button>
+      </form>
+    </div>
+  </div>
+</div>

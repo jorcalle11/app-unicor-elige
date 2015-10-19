@@ -1,0 +1,79 @@
+.option{
+	padding: 1.3em;
+	font-size: 1.3em;
+	text-align: left;
+}
+.icon {
+	font-size: 2.5em;
+	margin-top: -.4em;
+}
+.content{
+	margin: 0 auto;
+  padding: 0 15px;
+}
+.post{
+  display: inline-block;
+  margin: 0 2% 1em 0;
+  vertical-align: top;
+  width: 31.3%;
+}
+.candidate-avatar{
+	background: #E4E7EC;
+	border-radius: 50%;
+	display: inherit;
+	margin: 0 auto;
+	width: 200px;
+	height: 200px;
+}
+.comments-avatar{
+	width: 50px;
+	border-radius: 50%;
+	margin-right: 0.5em;
+}
+.candidate__post__image {
+	overflow: hidden;
+}
+.candidate__post__image > img{
+	max-width: 100%;
+}
+.candidate-post-comments{
+	margin-top: -1.2em;
+	margin-left: 8em;
+}
+.button_proposal {
+	padding-top: 3em;
+	text-align: left;
+}
+
+@media screen and (max-width: 1000px){
+	.button_proposal {
+		padding-top: .4em;
+		text-align: right;
+	}
+	.content-copy{
+		text-align: center;
+	}
+	.card {
+		width: 45%;
+	}
+	.event, .post {
+		width: 45%;
+	}
+}
+@media screen and (max-width: 700px){
+	.card, .event, .post{
+		width: 100%;
+	}
+}
+@media screen and (max-width: 1000px){
+	.candidate-avatar {
+		float: left;
+		margin: .5em .5em;
+	}
+}
+@media screen and (max-width: 500px){
+	.candidate-avatar{
+		float: none;
+		margin: 2% auto;
+	}
+}

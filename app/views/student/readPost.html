@@ -1,0 +1,75 @@
+<div class="container-fluid">
+	<div class="margin-up">
+		<aside class="col-md-4 col-lg-3">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title text-center">Perfil</h3>
+				</div>
+				<div class="panel-body text-center">
+					<img src="" alt="avatar" ng-src="{{postSelected.user.image.url}}" class="candidate-avatar">
+					<h1>#{{postSelected.candidate.cardNumber}}</h1>
+					<h4 class="green-light">{{postSelected.candidate.watchword}}</h4>
+					<h3>{{postSelected.user.displayName}}</h3>
+					<p >{{postSelected.user.program}}</p>
+					<div class="margin-up">
+			    	<small class="cursive">
+			    		<span class="ion-quote"></span>
+		    			{{postSelected.candidate.biography}}&nbsp;
+		    			<span class="ion-quote rotate"></span>
+			    	</small>
+					</div>
+	        <div class="signup-or-separator"><hr></div>
+			    <div class="margin-down text-center">
+			    	<h3>Redes sociales</h3>
+				    <ul class="social-network">
+				      <li><a href="#" class="icoFacebook" title="facebook"><i class="ion-social-facebook"></i></a></li>
+				      <li><a href="#" class="icoTwitter" title="Twitter"><i class="ion-social-twitter"></i></a></li>
+				      <li><a href="#" class="icoGoogle" title="Google +"><i class="ion-social-googleplus"></i></a></li>
+				    </ul>
+			    </div>
+				</div>
+			</div>
+		</aside>
+		<section class="col-md-8 col-lg-9" ng-init="readPostCandidate()">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h1 class="text-center">{{postSelected.title}}</h1>
+				</div>
+				<div class="panel-body">
+					<figure class="col-md-offset-1 text-center margin-down">
+						<center>
+							<img class="img-responsive" src="" alt="img-post" ng-src="{{postSelected.image.url}}" width="700px">
+						</center>
+					</figure>
+					<p class="margin-down">{{postSelected.content}}</p>
+					<h3 class="margin-up">Comentarios</h3>
+					<div class="comments">
+						<div ng-repeat="comment in postSelected.comments">
+							<div class="pull-right color-olive-light">
+								{{comment.created | date:'d MMM y, h:mm a'}}
+							</div>
+							<figure  class="left">
+								<img ng-src="{{comment.author.image}}" alt="candidato" class="comments-avatar">
+							</figure>
+							<small><strong>{{comment.author.name}}</strong> dice: </small>
+							<p>{{comment.content}}</p>
+	        		<div class="signup-or-separator"><hr></div>
+						</div>
+					  <div ng-if="!postSelected.comments.length" class="alert alert-info text-center">
+					    Aún no hay comentarios, se el primero en comentar.
+					  </div>
+					</div>
+					<form method="post" ng-submit="newComment()" name="comentForm" class="margin-up ng-pristine ng-invalid ng-invalid-required">
+						<div class="form-group">
+						<label for="content" class="control-label">Escribe tu comentario:</label>
+							<textarea name="content" rows="4" class="form-control ng-pristine ng-invalid ng-invalid-required" ng-model="content" required></textarea>
+						</div>
+						<div class="text-center">
+							<button type="submit"  class="btn btn-lg btn-primary" ng-disabled="comentForm.$invalid">Comentar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>

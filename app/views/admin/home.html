@@ -1,0 +1,31 @@
+<div class="container" ng-init="loadCandidates()">
+	<div ng-if="candidates.length" class="list-candidate">
+	  <h1 class="text-center">Candidatos</h1>
+	  <p class="text-center"> En esta sección, el administrador podrá visulaizar toda la información de los candidatos postualdos para ser elegidos por la comunidad universitaria.</p><br>
+		<div class="col-md-6" ng-repeat="candidate in candidates | orderBy: 'cardNumber'">
+			<div class="panel panel-success">
+			  <div class="panel-heading text-center">
+			  	<span class="left">{{candidate.cardNumber}}</span>
+			  	{{candidate.user.displayName}}
+	        <a class="remove pull-right" ng-click="removeCandidate(candidate)">
+	          <i class="ion-android-close icon_remove pointer"></i>
+	        </a>
+			  </div>
+			  <div class="panel-body center">
+		      <figure class="left margin-right">
+		      	<img ng-src="{{candidate.user.image.url}}" alt="avatar" class="img-thumbnail " width="150">
+		      </figure>
+		      <strong>Identificación</strong> : <span ng-bind="candidate.user.identification.number"></span>
+		      <br><strong>Numero de Tarjeton</strong> : <span ng-bind="candidate.cardNumber"></span>
+		      <br><strong>Email</strong> : <span ng-bind="candidate.user.email"></span>
+		      <br><strong>Facultad</strong> : <span ng-bind="candidate.user.faculty"></span>
+		      <br><strong>Programa</strong> : <span ng-bind="candidate.user.program"></span>
+		      <br><strong>Semestre</strong> : <span ng-bind="candidate.user.semester"></span>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="alert alert-warning text-center" ng-if="!candidates.length">
+		No hay candidatos inscritos, si lo deseas puedes <a href="#/candidatos-postulados/nuevo">crear uno.</a>
+	</div>
+</div>

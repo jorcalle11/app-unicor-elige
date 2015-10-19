@@ -1,0 +1,59 @@
+<div class="container-fluid" ng-init="readPost()">
+	<div class="margin-up">
+		<aside class="col-md-4 col-lg-3">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title text-center">Perfil</h3>
+				</div>
+				<div class="panel-body text-center">
+					<img src="" alt="avatar" ng-src="{{currentPost.user.image.url}}" class="candidate-avatar">
+					<h1>#{{currentPost.candidate.cardNumber}}</h1>
+					<h4 class="green-light">{{currentPost.candidate.watchword}}</h4>
+					<h3>{{currentPost.user.displayName}}</h3>
+					<p >{{currentPost.user.program}}</p>
+				</div>
+			</div>
+		</aside>
+		<section class="col-md-8 col-lg-9">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h1 class="text-center">{{currentPost.title}}</h1>
+				</div>
+				<div class="panel-body">
+					<figure class="col-md-offset-1 text-center margin-down">
+						<center>
+							<img class="img-responsive" src="" alt="img-post" ng-src="{{currentPost.image.url}}" width="700px">
+						</center>
+					</figure>
+					<p class="margin-down">{{currentPost.content}}</p>
+					<h3 class="margin-up">Comentarios</h3>
+					<div class="comments">
+						<div ng-repeat="comment in currentPost.comments">
+							<div class="pull-right color-olive-light">
+								{{comment.created | date:'d MMM y, h:mm a'}}
+							</div>
+							<figure  class="left">
+								<img ng-src="{{comment.author.image}}" alt="candidato" class="comments-avatar">
+							</figure>
+							<small><strong>{{comment.author.name}}</strong> dice: </small>
+							<p>{{comment.content}}</p>
+	        		<div class="signup-or-separator"><hr></div>
+						</div>
+						<div ng-if="!currentPost.comments.length" class="alert alert-info text-center">
+							Aún no hay comentarios, se el primero en comentar.
+						</div>
+					</div>
+					<form method="post" ng-submit="newComment()" name="comentForm" class="margin-up ng-pristine ng-invalid ng-invalid-required">
+						<div class="form-group">
+						<label for="content" class="control-label">Escribe tu comentario:</label>
+							<textarea name="content" rows="4" class="form-control ng-pristine ng-invalid ng-invalid-required" ng-model="content" required></textarea>
+						</div>
+						<div class="text-center">
+							<button type="submit"  class="btn btn-lg btn-primary" ng-disabled="comentForm.$invalid">Comentar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>

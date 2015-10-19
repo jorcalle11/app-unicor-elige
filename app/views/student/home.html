@@ -1,0 +1,20 @@
+<div class="container" >
+	<div ng-init="loadCandidates()" class="text-center">
+		<h1 class="margin-down">Candidatos</h1>
+		<div class="card" ng-repeat="candidate in uCandidates | orderBy: 'cardNumber'">
+	    <figure class="text-center">
+	    	<a ng-href="#/candidatos/{{candidate._id}}">
+	      	<img src="" alt="candidato" width="150px" class="img-circle" ng-src="{{candidate.user.image.url}}">
+	    	</a>
+	    </figure>
+	    <div class="text-center">
+	    	<h3>#{{candidate.cardNumber}}</h3>
+	    	<h3>{{candidate.user.displayName}}</h3>
+	    	<small>{{candidate.user.program}}</small>
+	    </div>
+		</div>
+	  <div ng-if="!uCandidates.length" class="alert alert-danger text-center container">
+	    <h2>No hay Candidatos inscritos</h2>
+	  </div>
+	</div>
+</div>

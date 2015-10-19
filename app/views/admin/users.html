@@ -1,0 +1,54 @@
+<div class="container-fluid" ng-init="loadUsers()">
+  <div ng-if="users.length">
+    <div class="text-center">
+      <h2>Estudiantes</h2>
+      <p>Lista de todos los estudiantes matriculados en los diferentes programas de la universidad de Córdoba.</p>
+      <br>
+    </div>
+    <div class="container-fluid">
+      <div class="form-group has-feedback" >
+        <input class="form-control input-lg ng-pristine ng-invalid ng-invalid-required ng-touched" type="text" name="search" ng-model="search" placeholder="Buscar..." required autofocus>
+        <span class="ion-search form-control-feedback"></span>
+      </div>
+    </div>
+    <div class="table-responsive col-md-12">
+      <table class="table table-bordered table-hover text-center" >
+        <thead >
+          <tr class="success">
+            <th class="text-center">Código</th>
+            <th class="text-center">Usuario <span class="ion-arrow-down-b pointer" ng-click="ordenar('firstName')"></span></th>
+            <th class="text-center">Role <span class="ion-arrow-down-b pointer" ng-click="ordenar('roles')"></span></th>
+            <th class="text-center">Tipo</th>
+            <th class="text-center">Numero</th>
+            <th class="text-center">Facultad <span class="ion-arrow-down-b pointer" ng-click="ordenar('faculty')"></span></th>
+            <th class="text-center">Programa <span class="ion-arrow-down-b pointer" ng-click="ordenar('program')"></span></th>
+            <th class="text-center">Semestre</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in users | orderBy: orden | filter: search">
+            <td>{{user._id}}</td>
+            <td>{{user.firstName}} {{user.lastName}}</td>
+            <td>{{user.roles[0]}}</td>
+            <td>{{user.identification.type}}</td>
+            <td>{{user.identification.number}}</td>
+            <td>{{user.faculty}}</td>
+            <td>{{user.program}}</td>
+            <td>{{user.semester}}</td>
+            <td>{{user.email}}</td>
+            <td class="text-center">
+              <a class="size" ng-click="removeUser(user)">
+                <i class="ion-trash-a icon_remove pointer"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="!users.length">
+    No hay usuarios guardados, si lo deseas puedes <a href="#/estudiantes/nuevo">crear un usuario</a>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="container-fluid" ng-init="loadEvents()">
+	<h1 class="margin-down text-center">Eventos</h1>
+	<div class="content margin-up text-center" >
+		<div class="post" ng-if="uEvents.length" ng-repeat="event in uEvents | orderBy:'start'| filter: filtro">
+			<div class="panel panel-warning">
+				<div class="panel-heading">
+					<h4>{{event.title}}</h4>
+				</div>
+				<div class="panel-body" style="text-align:left">
+					<ul>
+						<li><strong>Fecha: </strong>{{event.start | date:'mediumDate'}}</li>
+						<li><strong>Hora: </strong>{{event.start | date:'h:mm a'}}</li>
+						<li><strong>Lugar: </strong>{{event.place}}</li>
+					</ul>
+				</div>
+				<div class="panel-footer" style="text-align:left;">
+					<figure  class="left">
+						<img ng-src="{{event.user.image.url}}" alt="candidato" class="comments-avatar">
+					</figure>
+					<a href="#/candidatos/{{event.candidate}}">{{event.user.displayName}}</a><br>
+					<small class="olive-light">{{event.user.program}}</small>
+				</div>
+			</div>
+		</div>
+		<div class="container" ng-if="!uEvents.length">
+			<div class="alert alert-info">
+				<h2>No hay eventos</h2>
+			</div>
+		</div>
+	</div>
+</div>

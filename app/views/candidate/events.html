@@ -1,0 +1,22 @@
+<div class="container-fluid">
+	<aside class="col-md-4 ">
+		<h3 class="text-center">Mis Eventos</h3>
+
+	  <div class="alert alert-info" ng-repeat="event in events | orderBy: 'start'">
+	  	<div class="form-group" style="float: right;">
+	  		<button class="btn btn-warning btn-xs" ng-click="editEvent(event)"><i class="glyphicon glyphicon-pencil"></i></button>&nbsp;
+	  		<button class="btn btn-danger btn-xs" ng-click="remove(event)"><i class="glyphicon glyphicon-trash"></i></button>
+	  	</div>
+	  	<h4 class="text-center" ng-bind="event.title"></h4>
+	  	<strong>Fecha: </strong><span ng-bind="event.start | date:'mediumDate'"></span><br>
+	  	<strong>Hora: </strong><span ng-bind="event.start | date:'h:mma'"></span><br>
+	  	<strong>Lugar: </strong><span ng-bind="event.place"></span>
+	  </div>
+	  <div class="alert alert-warning text-center" ng-if="!events.length">
+	  	no hay eventos Guardados
+	  </div>
+	</aside>
+	<section class="col-md-7" ng-init="loadEvents()" style="margin-top:1em;">
+		<div ui-calendar="uiConfig.calendar" class="span7 calendar" ng-model="eventSources"></div>
+	</section>
+</div>

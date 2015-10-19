@@ -1,0 +1,58 @@
+<div class="container_copy">
+  <div class="center-form panel">
+    <div class="panel-body">
+      <h2 class="text-center">Registrar Usuario</h2>
+      <form method="post" ng-submit="addUser()" name="signupForm">
+        <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.firstName.$invalid && signupForm.firstName.$dirty }">
+          <input class="form-control input-lg" type="text" name="firstName" ng-model="newUser.firstName" placeholder="Nombre" required autofocus>
+          <span class="ion-person form-control-feedback"></span>
+          <div class="help-block text-danger" ng-if="signupForm.firstName.$dirty" ng-messages="signupForm.firstName.$error">
+            <div ng-message="required">Escriba el Nombre</div>
+          </div>
+        </div>
+        <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.lastName.$invalid && signupForm.lastName.$dirty }">
+          <input class="form-control input-lg" type="text" name="lastName" ng-model="newUser.lastName" placeholder="Apellido" required autofocus>
+          <span class="ion-person form-control-feedback"></span>
+          <div class="help-block text-danger" ng-if="signupForm.lastName.$dirty" ng-messages="signupForm.lastName.$error">
+            <div ng-message="required">Escriba el Apellido</div>
+          </div>
+        </div>
+	      <div class="form-group has-feedback" ng-init="newUser.identification.type = 'CC'">
+	        <select class="form-control input-lg" ng-model="newUser.identification.type" >
+	          <option>TI</option>
+	          <option>CC</option>
+	          <option>CE</option>
+	        </select>
+	      </div>
+	      <div class="form-group has-feedback" ng-class="{ 'has-error': signupForm.number.$invalid && signupForm.number.$dirty }">
+	        <input class="form-control input-lg" type="text" name="number" ng-model="newUser.identification.number" placeholder="N° identificacíon" required>
+          <span class="ion-pound form-control-feedback"></span>
+	        <div class="help-block" ng-if="registroForm.number.$dirty" ng-messages="registroForm.number.$error">
+	          <div ng-message="required">Escriba el numero de identificacíon</div>
+	        </div>
+	      </div>
+        <div class="form-group has-feedback">
+          <select class="form-control input-lg" ng-model="newUser.faculty" ng-options="faculty for faculty in faculties" ng-init="newUser.faculty = faculties[0]"></select>
+        </div>
+        <div class="form-group has-feedback">
+          <select class="form-control input-lg" ng-model="newUser.program" ng-options="program for program in programs">
+          </select>
+        </div>
+        <div class="form-group has-feedback">
+          <select class="form-control input-lg" ng-model="newUser.semester" ng-init="newUser.semester = semesters[0]">
+            <option ng-repeat="semester in semesters">{{semester}}</option>
+          </select>
+        </div>
+        <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.email.$invalid && signupForm.email.$dirty }">
+          <input class="form-control input-lg" type="email" id="email" name="email" ng-model="newUser.email" placeholder="Email" required>
+          <span class="ion-at form-control-feedback"></span>
+          <div class="help-block text-danger" ng-if="signupForm.email.$dirty" ng-messages="signupForm.email.$error">
+            <div ng-message="required">Your email address is required.</div>
+            <div ng-message="pattern">Your email address is invalid.</div>
+          </div>
+        </div>
+        <button type="submit" ng-disabled="signupForm.$invalid" class="btn btn-lg btn-block btn-primary">Sign up</button>
+      </form>
+    </div>
+  </div>
+</div>

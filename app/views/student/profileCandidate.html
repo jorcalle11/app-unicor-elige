@@ -1,0 +1,110 @@
+<div class="container-fluid" ng-init="findCandidate()">
+	<aside class="col-md-4 col-lg-3">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title text-center">Perfil</h3>
+			</div>
+			<div class="panel-body text-center">
+				<img src="" alt="avatar" ng-src="{{candidateSelected.user.image.url}}" class="candidate-avatar">
+				<h1>#{{candidateSelected.cardNumber}}</h1>
+				<h4 class="green-light">{{candidateSelected.watchword}}</h4>
+				<h3 class="name">{{candidateSelected.user.displayName}}</h3>
+				<p >{{candidateSelected.user.program}}</p>
+				<div ng-if="candidateSelected.biography" class="margin-up">
+		    	<small class="cursive">
+		    		<span class="ion-quote"></span>
+	    			{{candidateSelected.biography}}&nbsp;
+	    			<span class="ion-quote rotate"></span>
+		    	</small>
+				</div>
+        <div class="signup-or-separator"><hr></div>
+		    <div class="margin-down text-center">
+		    	<h3>Redes sociales</h3>
+			    <ul class="social-network">
+			      <li><a href="#" class="icoFacebook" title="facebook"><i class="ion-social-facebook"></i></a></li>
+			      <li><a href="#" class="icoTwitter" title="Twitter"><i class="ion-social-twitter"></i></a></li>
+			      <li><a href="#" class="icoGoogle" title="Google +"><i class="ion-social-googleplus"></i></a></li>
+			    </ul>
+		    </div>
+			</div>
+		</div>
+	</aside>
+	<section class="col-md-8 col-lg-9">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<span href="#" ng-click="showProposal = !showProposal" class="col-md-offset-1 pointer blue-marine">
+					<h2><span class="ion-ios-paper-outline"></span>
+						&nbsp;&nbsp;Propuestas
+						<span class="ion-chevron-up pull-right" ng-if="showProposal"></span>
+						<span class="ion-chevron-down pull-right" ng-if="!showProposal"></span>
+					</h2>
+				</span>
+				<div ng-show="showProposal">
+					<div ng-if="candidateSelected.proposals.length" class="candidate__proposal col-md-offset-1" ng-repeat="proposal in candidateSelected.proposals">
+						<p><span class="ion-arrow-right-b"></span>&nbsp;&nbsp;{{proposal.content}}</p>
+						<div class="color-olive-light text-right">
+								<small>{{proposal.creation | date:'mediumDate' }}</small>
+						</div>
+						<div class="signup-or-separator">
+				      <hr>
+				    </div>
+					</div>
+					<div class="alert alert-info" ng-if="!candidateSelected.proposals.length">
+						<p class="text-info text-center">El candidato aún no tiene propuestas.</p>
+					</div>
+				</div>
+				<span href="#" ng-init="findEventsCandidate()" ng-click="showEvents = !showEvents" class="col-md-offset-1 pointer blue-marine">
+					<h2><span class="ion-ios-calendar-outline"></span>
+						&nbsp;&nbsp;Eventos
+						<span class="ion-chevron-up pull-right" ng-if="showEvents"></span>
+						<span class="ion-chevron-down pull-right" ng-if="!showEvents"></span>
+					</h2>
+				</span>
+				<div ng-show="showEvents" >
+					<div ng-if="eventsCandidate.length" class="candidate__proposal col-md-offset-1" ng-repeat="event in eventsCandidate | orderBy:'start'">
+						<h4>{{event.title}}</h4>
+						<ul>
+							<li><span class="ion-android-calendar"></span>&nbsp;<small>{{event.start | date: 'mediumDate'}}</small></li>
+							<li><span class="ion-clock"></span>&nbsp;<small>{{event.start | date: 'shortTime'}}</small></li>
+							<li><span class="ion-home"></span>&nbsp;<small>{{event.place}}</small></li>
+							<small class="pull-right" ng-if="event.persons.length">
+								<strong>{{event.persons.length}}&nbsp;</strong> Personas asistarán
+							</small>
+						</ul>
+						<div class="signup-or-separator">
+				      <hr>
+				    </div>
+					</div>
+					<div class="alert alert-info" ng-if="!eventsCandidate.length">
+						<p class="text-info text-center">No hay eventos programados por el candidato.</p>
+					</div>
+				</div>
+				<span ng-init="findPostsCandidate()" ng-click="showPost = !showPost" class="col-md-offset-1 pointer blue-marine">
+					<h2><span class="ion-compose"></span>
+						&nbsp;&nbsp;Post
+						<span class="ion-chevron-up pull-right" ng-if="showPost"></span>
+						<span class="ion-chevron-down pull-right" ng-if="!showPost"></span>
+					</h2>
+				</span>
+				<div ng-show="showPost">
+					<div ng-if="postsCandidate.length" class="candidate__proposal col-md-offset-1"  ng-repeat="post in postsCandidate">
+						<a href="#/posts/{{post._id}}"><span class="ion-arrow-right-b"></span>&nbsp;&nbsp;{{post.title}}</a>
+						<div>
+							<small class="color-olive-light">{{post.created | date:'mediumDate' }}</small>
+							<div class="pull-right ">
+								{{post.comments.length}}
+								<span class="ion-chatbubbles"></span>
+							</div>
+						</div>
+						<div class="signup-or-separator">
+				      <hr>
+				    </div>
+					</div>
+					<div class="alert alert-info" ng-if="!postsCandidate.length">
+						<p class="text-info text-center">No hay posts publicados.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

@@ -1,0 +1,35 @@
+{
+  "name": "unicor-elige",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "^1.3.0",
+    "bootstrap": "^3.2.0",
+    "angular-animate": "^1.3.0",
+    "angular-aria": "^1.3.0",
+    "angular-messages": "^1.3.0",
+    "angular-sanitize": "^1.3.0",
+    "angular-touch": "^1.3.0",
+    "angular-ui-router": "~0.2.15",
+    "satellizer": "~0.12.5",
+    "Ionicons": "ionicons#~2.0.1",
+    "angular-toastr": "~1.5.0",
+    "angular-bootstrap": "~0.14.2",
+    "jquery-ui": "~1.11.4",
+    "angular-ui-calendar": "~1.0.1",
+    "eonasdan-bootstrap-datetimepicker": "~4.17.37"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.3.0"
+  },
+  "appPath": "app",
+  "moduleName": "unicorEligeApp",
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  }
+}
