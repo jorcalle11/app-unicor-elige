@@ -9,6 +9,7 @@
    */
   angular.module('unicorEligeApp')
     .controller('ProfileCtrl',['$rootScope','$scope','toastr','Profile',function ($rootScope,$scope,toastr,Profile){
+      $scope.changePassword = {};
 
       $scope.profile = function(){
     		Profile.getProfile().then(function(response){

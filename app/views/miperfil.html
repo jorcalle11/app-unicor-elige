@@ -50,11 +50,11 @@
 					<h3>Contraseña</h3>
 					<form method="post" ng-submit="updatePassword()" name="profileChangePasswordForm" class="col-md-6 col-sm-6 col-md-offset-3 col-sm-offset-3 ng-pristine ng-invalid ng-invalid-required">
 						<div class="form-group has-feedback">
-							<input class="form-control input-lg ng-pristine ng-invalid ng-invalid-required ng-touched" type="password" name="password" ng-model="currentPassword" placeholder="Contraseña actual" required autofocus>
+							<input class="form-control input-lg ng-pristine ng-invalid ng-invalid-required ng-touched" type="password" name="password" ng-model="changePassword.current" placeholder="Contraseña actual" required autofocus>
 							<span class="ion-android-unlock form-control-feedback"></span>
 						</div>
 						<div class="form-group has-feedback">
-							<input class="form-control input-lg ng-pristine ng-invalid ng-invalid-required ng-touched" type="password" name="password" ng-model="changePassword.newPassword" placeholder="Nueva contraseña" required autofocus>
+							<input class="form-control input-lg ng-pristine ng-invalid ng-invalid-required ng-touched" type="password" name="password" ng-model="changePassword.new" placeholder="Nueva contraseña" required autofocus>
 							<span class="ion-key form-control-feedback"></span>
 						</div>
 						<button type="submit" ng-disabled="profileChangePasswordForm.$invalid" class="btn btn-lg  btn-block btn-success" disabled="disabled">Actualizar contraseña</button>

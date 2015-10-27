@@ -50,7 +50,7 @@
         .state('home', {
           url: '/',
           templateUrl: 'views/main.html',
-          controller: 'MainCtrl',
+          controller: null,
           resolve: {
             skipIfLoggedIn: skipIfLoggedIn
           }
