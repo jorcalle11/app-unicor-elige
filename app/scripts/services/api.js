@@ -9,7 +9,7 @@
 	 */
 	angular.module('unicorEligeApp')
 	  .constant('Api',{
-	  	//url:'http://ec2-54-148-128-14.us-west-2.compute.amazonaws.com/'
-	  	url: 'http://localhost:3000/'
+	  	url:'http://ec2-54-148-128-14.us-west-2.compute.amazonaws.com/'
+	  	//url: 'http://localhost:3000/'
 	  });
 })();

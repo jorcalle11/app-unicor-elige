@@ -12,24 +12,22 @@
       </div>
     </div>
     <div class="table-responsive col-md-12">
-      <table class="table table-bordered table-hover text-center" >
+      <table class="table table-bordered table-hover" >
         <thead >
           <tr class="success">
-            <th class="text-center">Código</th>
             <th class="text-center">Usuario <span class="ion-arrow-down-b pointer" ng-click="ordenar('firstName')"></span></th>
             <th class="text-center">Role <span class="ion-arrow-down-b pointer" ng-click="ordenar('roles')"></span></th>
             <th class="text-center">Tipo</th>
             <th class="text-center">Numero</th>
             <th class="text-center">Facultad <span class="ion-arrow-down-b pointer" ng-click="ordenar('faculty')"></span></th>
             <th class="text-center">Programa <span class="ion-arrow-down-b pointer" ng-click="ordenar('program')"></span></th>
-            <th class="text-center">Semestre</th>
+            <th class="text-center">Semestre </th>
             <th class="text-center">Email</th>
             <th class="text-center">Acción</th>
           </tr>
         </thead>
-        <tbody>
-          <tr ng-repeat="user in users | orderBy: orden | filter: search">
-            <td>{{user._id}}</td>
+        <tbody class="text-center">
+          <tr ng-repeat="user in users | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize | orderBy: orden | filter: search">
             <td>{{user.firstName}} {{user.lastName}}</td>
             <td>{{user.roles[0]}}</td>
             <td>{{user.identification.type}}</td>
@@ -46,6 +44,9 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="text-center">
+      <pagination total-items="users.length" ng-model="currentPage" items-per-page="pageSize"></pagination>
     </div>
   </div>
   <div class="alert alert-warning text-center" ng-if="!users.length">

@@ -15,7 +15,7 @@
 		  		if ($auth.getPayload().role === 'admin'){
 						$state.go('adminHome');
 		  		} else if ($auth.getPayload().role === 'candidato'){
-		  				$state.go('perfil');
+		  				$state.go('propuestas');
 		  			} else if ($auth.getPayload().role === 'estudiante') {
 		  				$state.go('studentHome');
 		  			}

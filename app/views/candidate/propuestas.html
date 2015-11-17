@@ -1,0 +1,181 @@
+<div class="container-fluid">
+	<aside class="col-md-4 col-lg-3" ng-init="profile()">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title text-center">Perfil</h3>
+			</div>
+			<div class="panel-body">
+				<img src="" alt="avatar" ng-src="{{currentCandidate.user.image.url}}" class="candidate-avatar">
+				<h1 class="text-center">#{{currentCandidate.cardNumber}}</h1>
+				<h3 class="text-center margin-down">{{currentCandidate.user.displayName}}</h3>
+				<p class="text-center">{{currentCandidate.user.program}}</p>
+        <div class="signup-or-separator"><hr></div>
+				<br>
+				<form method="post" ng-submit="updateProfile()" name="updateProfileForm" class="ng-pristine ng-invalid ng-invalid-required">
+					<div class="form-group">
+						<label for="watchword" class="control-label">Lema :</label>
+						<input type="text" class="form-control ng-pritine ng-valid ng-touched" ng-model="currentCandidate.watchword">
+					</div>
+					<div class="form-group">
+						<label for="biography" class="control-label">Acerca de mi :</label>
+						<textarea name="biography" rows="5" class="form-control ng-pritine ng-valid ng-touched"  ng-model="currentCandidate.biography" ></textarea>
+					</div>
+					<div class="text-center">
+						<button type="submit"  class="btn btn-lg btn-primary" ng-disabled="updateProfileForm.$pristine">Actualizar</button>
+					</div>
+				</form>
+				<div>
+					<div class="signup-or-separator"><hr></div>
+					<h4 class="text-center">Redes Sociles</h4>
+	        <button class="btn btn-block btn-twitter" ng-if="!currentCandidate.twitter" ng-click="link('twitter')">
+	          <i class="ion-social-twitter"></i> Conectar con Twitter
+	        </button>
+	        <button class="btn btn-block btn-danger" ng-if="currentCandidate.twitter" ng-click="unlink('twitter')">
+	          Desconectar de Twitter
+	        </button>
+	        <button class="btn btn-block btn-facebook" ng-if="!currentCandidate.facebook" ng-click="link('facebook')">
+	          <i class="ion-social-facebook"></i> Conectar con Facebook
+	        </button>
+	        <button class="btn btn-block btn-danger" ng-if="currentCandidate.facebook" ng-click="unlink('facebook')">
+	          Desconectar de Facebook
+	        </button>
+	        <button class="btn btn-block btn-instagram" ng-if="!currentCandidate.instagram" ng-click="link('instagram')">
+	          <i class="ion-social-instagram"></i> conectar con Instagram
+	        </button>
+	        <button class="btn btn-block btn-danger" ng-if="currentCandidate.instagram" ng-click="unlink('instagram')">
+	          Desconectar de Instagram
+	        </button>
+				</div>
+			</div>
+		</div>
+	</aside>
+	<section class="col-md-8 col-lg-9">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title text-center">Propuestas</h3>
+			</div>
+			<div class="panel-body">
+				<form method="post" ng-submit="addProposal()" id="formAddProposal"  name="addProposalForm" class="ng-pristine ng-invalid ng-invalid-required">
+					<div class="col-md-9">
+						<div class="form-group">
+							<label for="biography" class="control-label">Ingresar propuesta :</label>
+							<textarea name="biography" rows="5" cols="10" class="form-control ng-pritine ng-valid ng-touched"  ng-model="newProposal.content" required></textarea>
+							<div class="pull-right">
+								<small class="color-olive-light">
+									{{newProposal.content.length || 0}}
+								</small>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 button_proposal">
+						<button type="submit" class="btn btn-primary" ng-disabled="addProposalForm.$invalid"><span class="ion-paper-airplane"></span> Guardar</button>
+					</div>
+				</form>
+				<form method="post" ng-submit="updateProposal()" id="formUpdateProposal"  name="updateProposalForm" class="ng-pristine ng-invalid ng-invalid-required" style="display:none;">
+					<div class="col-md-9">
+						<div class="form-group">
+							<label for="biography" class="control-label">Ingresar propuesta :</label>
+							<textarea name="biography" rows="5" cols="10" class="form-control ng-pritine ng-valid ng-touched"  ng-model="proposalToEdit.content" required></textarea>
+						</div>
+					</div>
+					<div class="col-md-3 button_proposal">
+						<button type="submit" class="btn btn-warning" ng-disabled="updateProposalForm.$invalid"><span class="ion-refresh"></span> Actualizar</button>
+					</div>
+				</form>
+				<div class="col-md-12">
+	        <div class="signup-or-separator">
+	          <hr>
+	        </div>
+			    <div class="table-responsive" ng-if="currentCandidate.proposals.length">
+			      <table class="table table-bordered table-hover" >
+			        <thead >
+			          <tr class="">
+			            <th class="text-center" style="width:50px;">N°</th>
+			            <th class="text-center">Propuesta</th>
+			            <th class="text-center" style="width: 80px;">Acción</th>
+			          </tr>
+			        </thead>
+			        <tbody>
+			          <tr ng-repeat="proposal in currentCandidate.proposals">
+			            <td >{{$index +1}}</td>
+			            <td>{{proposal.content}}</td>
+			            <td>
+			              <a class="pointer size" ng-click="showFormToEdit(proposal)">
+			                <i class="ion-edit icon_edit"></i>
+			              </a>
+										 &nbsp;&nbsp;
+			              <a class="pointer size" ng-click="removeProposal(proposal)">
+			                <i class="ion-trash-a icon_remove"></i>
+			              </a>
+			            </td>
+			          </tr>
+			        </tbody>
+			      </table>
+			    </div>
+				  <div class="alert alert-info text-center" ng-if="!currentCandidate.proposals.length">
+				    No hay propuestas guardadas</a>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="col-md-8 col-lg-9" style="display:none;">
+		<div class="panel panel-default">
+			<div class="panel-heading text-center">
+				Redes Sociales
+			</div>
+			<div class="panel-body">
+			<form method="post" name="socialForm" class="ng-pristine ng-invalid ng-invalid-required" ng-submit="updateProfile()">
+				<div class="col-md-4 col-sm-6">
+					<div class="text-center facebook">
+						<span class="ion-social-facebook size"></span>
+					</div>
+					<br>
+					<div class="form-group">
+						<label for="username" class="control-label"><span class="ion-person"></span> Usuario :</label>
+						<input type="text" name ="username"class="form-control ng-pritine ng-valid ng-touched" ng-model="currentCandidate.socials.facebook.username" placeholder="Nombre como apareces en facebook" required>
+					</div>
+					<div class="form-group">
+						<label for="url" class="control-label"><span class="ion-link"></span> Url :</label>
+						<input type="text" name ="url"class="form-control ng-pritine ng-valid ng-touched" ng-model="currentCandidate.socials.facebook.url" placeholder="Url de su perfil">
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<div class="text-center twitter">
+						<span class="ion-social-twitter size"></span>
+					</div>
+					<br>
+					<div class="form-group">
+						<label for="username" class="control-label"><span class="ion-person"></span> Usuario :</label>
+						<input type="text" name ="username"class="form-control ng-pritine ng-valid ng-touched" ng-model="currentCandidate.socials.twitter.username" placeholder="@pepito11">
+					</div>
+					<div class="form-group">
+						<label for="url" class="control-label"><span class="ion-link"></span> Url :</label>
+						<input type="text" name ="url"class="form-control ng-pritine ng-valid ng-touched" ng-model="currentCandidate.socials.twitter.url" placeholder="Url de su perfil">
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<div class="text-center instagram">
+						<span class="ion-social-instagram size"></span>
+					</div>
+					<br>
+					<div class="form-group">
+						<label for="username" class="control-label"><span class="ion-person"></span> Usuario :</label>
+						<input type="text" name ="username"class="form-control ng-pritine ng-valid ng-touched" ng-model="currentCandidate.socials.instagram.username" placeholder="Nombre como apareces en Instagram">
+					</div>
+					<div class="form-group">
+						<label for="url" class="control-label"><span class="ion-link"></span> Url :</label>
+						<input type="text" name ="url"class="form-control ng-pritine ng-valid ng-touched" ng-model="currentCandidate.socials.instagram.url" placeholder="Url de su perfil">
+					</div>
+				</div>
+				<div class="col-md-4 col-md-offset-4">
+					<br>
+					<button type="submit" class="btn btn-success btn-block btn-lg" ng-disabled="socialForm.$invalid || socialForm.$pristine">Guardar</button>
+				</div>
+			</form>
+
+			</div>
+		</div>
+	</div>
+</div>
+

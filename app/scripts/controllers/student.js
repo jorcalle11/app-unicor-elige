@@ -8,7 +8,7 @@
    * Controller of the unicorEligeApp
    */
   angular.module('unicorEligeApp')
-    .controller('StudentCtrl',['$rootScope','$scope','$stateParams','toastr','Candidates','Events','Posts',function ($rootScope,$scope,$stateParams,toastr,Candidates,Events,Posts){
+    .controller('StudentCtrl',['$rootScope','$scope','$stateParams','toastr','Candidates','Events','Posts','Comments',function ($rootScope,$scope,$stateParams,toastr,Candidates,Events,Posts,Comments){
 
       $scope.showProposal = true;
       $scope.showEvents = false;
@@ -16,6 +16,10 @@
     	$scope.uCandidates = [];
       $scope.uPosts = [];
       $scope.eventsCandidate = [];
+      $scope.addComment = {};
+      $scope.formEdit = false;
+      $scope.pageSize= 6;
+      $scope.currentPage = 1;
 
       $scope.loadCandidates = function(){
         Candidates.allCandidates().then(function(response){
@@ -62,18 +66,52 @@
         });
       };
 
+      $scope.loadComments = function(){
+        Comments.getComments($stateParams.postId).then(function(response){
+          $scope.comments = response;
+        });
+      };
+
       $scope.newComment = function(){
-        $scope.comment = {
-          created: Date.now(),
-          content: $scope.content,
-          author: {
-            name : $rootScope.currentUser.displayName,
-            image: $rootScope.currentUser.image.url
-          }
-        };
-        Posts.addComment($stateParams.postId, $scope.comment).then(function(){
-          $scope.postSelected.comments.push($scope.comment);
-          $scope.content = '';
+        $scope.addComment.created = Date.now();
+        $scope.addComment.post = $stateParams.postId;
+
+        Comments.add($scope.addComment).then(function(response){
+          response.user = {},
+          response.user._id = $rootScope.currentUser.sub;
+          response.user.displayName = $rootScope.currentUser.displayName;
+          response.user.image = $rootScope.currentUser.image;
+          $scope.comments.push(response);
+          $scope.addComment = {};
+        });
+      };
+
+      $scope.deleteComment = function(comment){
+        Comments.remove(comment._id).then(function(){
+          $scope.comments.map(function(result,index){
+            if (result._id === comment._id) {
+              $scope.comments.splice(index,1);
+            }
+          });
+        });
+      };
+
+      $scope.editComment = function(comment){
+        $scope.formEdit = true;
+        $scope.commentEdit = comment;
+      };
+
+      $scope.updateComment = function(){
+        $scope.commentEdit.edited = Date.now();
+        Comments.update($scope.commentEdit).then(function(){
+          $scope.comments.map(function(comment){
+            if (comment.id === $scope.commentEdit.id) {
+              comment = $scope.commentEdit;
+            }
+          });
+          $scope.commentEdit = {};
+          $scope.formEdit = false;
+          toastr.info('comentario editado');
         });
       };
 

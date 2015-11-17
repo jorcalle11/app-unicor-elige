@@ -8,7 +8,7 @@
    * Controller of the unicorEligeApp
    */
   angular.module('unicorEligeApp')
-    .controller('CandidateCtrl',['$scope','toastr','Candidates','Proposals',function ($scope,toastr,Candidates,Proposals){
+    .controller('CandidateCtrl',['$scope','$auth','toastr','Candidates','Proposals',function ($scope,$auth,toastr,Candidates,Proposals){
 
       $scope.currentCandidate = {};
 
@@ -26,6 +26,23 @@
           $scope.currentCandidate = response;
         });
       };
+
+    $scope.link = function(provider) {
+      $auth.link(provider)
+        .then(function() {
+          toastr.success('Perfil de ' + provider + ' vinculado exitosamente');
+          $scope.profile();
+        })
+        .catch(function(response) {
+          toastr.error(response.data.message, response.status);
+        });
+    };
+    $scope.unlink = function(provider) {
+      Candidates.update({_id:$scope.currentCandidate._id, provider: provider}).then(function(){
+        toastr.info('Se desvinculó la cuenta de '+provider);
+        $scope.profile();
+      });
+    };
 
       $scope.showFormToEdit = function(proposal){
         $scope.proposalToEdit = {};

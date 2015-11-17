@@ -1,7 +1,7 @@
 <section class="container-fluid" ng-init="loadPosts()">
 	<h1 class="text-center">Post</h1>
 	<div class="margin-up text-center">
-		<div class="card post" ng-repeat="post in uPosts | orderBy:'created'">
+		<div class="card post" ng-repeat="post in uPosts | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize |orderBy:'-created'">
 			<article class="panel panel-default">
 				<div class="panel-heading">
 				  <div class="card-block">
@@ -9,7 +9,7 @@
 				    <h6 class="card-subtitle text-muted">
 				    	<div class="text-left">{{post.created | date:'mediumDate'}}</div>
 				    	<div class="candidate-post-comments" style="text-align:right">
-				    		<strong>{{post.comments.length}}</strong> comentarios
+				    		<strong>{{post.numComments}}</strong> comentarios
 				    	</div>
 				    </h6>
 				  </div>
@@ -28,6 +28,9 @@
 				</div>
 			</article>
 		</div>
+    <div class="text-center">
+      <pagination total-items="uPosts.length" ng-model="currentPage" items-per-page="pageSize"></pagination>
+    </div>
 	  <div class="alert alert-warning text-center container" ng-if="!uPosts.length">
 	    <h2>No hay posts</h2>
 	  </div>

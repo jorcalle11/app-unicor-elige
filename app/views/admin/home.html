@@ -2,7 +2,7 @@
 	<div ng-if="candidates.length" class="list-candidate">
 	  <h1 class="text-center">Candidatos</h1>
 	  <p class="text-center"> En esta sección, el administrador podrá visulaizar toda la información de los candidatos postualdos para ser elegidos por la comunidad universitaria.</p><br>
-		<div class="col-md-6" ng-repeat="candidate in candidates | orderBy: 'cardNumber'">
+		<div class="card width" ng-repeat="candidate in candidates | orderBy: 'cardNumber'">
 			<div class="panel panel-success">
 			  <div class="panel-heading text-center">
 			  	<span class="left">{{candidate.cardNumber}}</span>
@@ -12,8 +12,8 @@
 	        </a>
 			  </div>
 			  <div class="panel-body center">
-		      <figure class="left margin-right">
-		      	<img ng-src="{{candidate.user.image.url}}" alt="avatar" class="img-thumbnail " width="150">
+		      <figure class="left margin-right float-none">
+		      	<img ng-src="{{candidate.user.image.url}}" alt="avatar" class="img-thumbnail" width="150">
 		      </figure>
 		      <strong>Identificación</strong> : <span ng-bind="candidate.user.identification.number"></span>
 		      <br><strong>Numero de Tarjeton</strong> : <span ng-bind="candidate.cardNumber"></span>

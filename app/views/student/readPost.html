@@ -8,25 +8,41 @@
 				<div class="panel-body text-center">
 					<img src="" alt="avatar" ng-src="{{postSelected.user.image.url}}" class="candidate-avatar">
 					<h1>#{{postSelected.candidate.cardNumber}}</h1>
-					<h4 class="green-light">{{postSelected.candidate.watchword}}</h4>
-					<h3>{{postSelected.user.displayName}}</h3>
-					<p >{{postSelected.user.program}}</p>
-					<div class="margin-up">
+					<h4 class="green-light margin-down">{{postSelected.candidate.watchword}}</h4>
+					<h2>{{postSelected.user.displayName}}</h2>
+					<p class="margin-down">{{postSelected.user.program}}</p>
+					<div ng-if="postSelected.candidate.biography" class="margin-up">
 			    	<small class="cursive">
 			    		<span class="ion-quote"></span>
 		    			{{postSelected.candidate.biography}}&nbsp;
 		    			<span class="ion-quote rotate"></span>
 			    	</small>
 					</div>
-	        <div class="signup-or-separator"><hr></div>
-			    <div class="margin-down text-center">
-			    	<h3>Redes sociales</h3>
-				    <ul class="social-network">
-				      <li><a href="#" class="icoFacebook" title="facebook"><i class="ion-social-facebook"></i></a></li>
-				      <li><a href="#" class="icoTwitter" title="Twitter"><i class="ion-social-twitter"></i></a></li>
-				      <li><a href="#" class="icoGoogle" title="Google +"><i class="ion-social-googleplus"></i></a></li>
-				    </ul>
-			    </div>
+	    		<div ng-if="postSelected.candidate.twitter.id || postSelected.candidate.instagram.id || postSelected.candidate.facebook.id" class="margin-down text-center">
+		        <div class="signup-or-separator"><hr></div>
+	    			<h3 class="text-center">Redes Sociales</h3>
+		        <a href="https://facebook.com/{{postSelected.candidate.facebook.id}}" ng-if="postSelected.candidate.facebook.id"	class="btn btn-block btn-facebook text-center" target="_blank" >
+	    				<figure class="left">
+	    					<img class="social-avatar" src="" alt="{{postSelected.candidate.facebook.username}}" title="{{postSelected.candidate.facebook.username}}" ng-src="{{postSelected.candidate.facebook.photo}}">
+	    				</figure>
+	  					<span class="ion-social-facebook" style="font-size:3em"></span>
+	  					<p>{{postSelected.candidate.facebook.username}}</p>
+		        </a>
+		        <a href="https://twitter.com/{{postSelected.candidate.twitter.username}}"	ng-if="postSelected.candidate.twitter.id" class="btn btn-block btn-twitter text-center" target="_blank" >
+	    				<figure class="left">
+	    					<img class="social-avatar" src="" alt="{{postSelected.candidate.twitter.username}}" title="{{postSelected.candidate.twitter.username}}" ng-src="{{postSelected.candidate.twitter.photo}}">
+	    				</figure>
+	  					<span class="ion-social-twitter" style="font-size:3em"></span>
+	  					<p><span class="ion-at"></span>{{postSelected.candidate.twitter.username}}</p>
+		        </a>
+		        <a href="https://instagram.com/{{postSelected.candidate.instagram.username}}"	ng-if="postSelected.candidate.instagram.id" class="btn btn-block btn-instagram text-center" target="_blank" >
+	    				<figure class="left">
+	    					<img class="social-avatar" src="" alt="{{postSelected.candidate.instagram.username}}" title="{{postSelected.candidate.instagram.username}}" ng-src="{{postSelected.candidate.instagram.photo}}">
+	    				</figure>
+	  					<span class="ion-social-instagram" style="font-size:3em"></span>
+	  					<p></span>{{postSelected.candidate.instagram.username}}</p>
+		        </a>
+	    		</div>
 				</div>
 			</div>
 		</aside>
@@ -43,29 +59,48 @@
 					</figure>
 					<p class="margin-down">{{postSelected.content}}</p>
 					<h3 class="margin-up">Comentarios</h3>
-					<div class="comments">
-						<div ng-repeat="comment in postSelected.comments">
+					<div class="comments" ng-init="loadComments()">
+						<div ng-repeat="comment in comments | orderBy:'created'">
 							<div class="pull-right color-olive-light">
-								{{comment.created | date:'d MMM y, h:mm a'}}
+								<div ng-if="!comment.edited">{{comment.created | date:'d MMM y, h:mm a'}}</div>
+								<div ng-if="comment.edited">editado {{comment.edited | date:'d MMM y, h:mm a'}}</div>
+								<div class="pull-right">
+		              <a  ng-if="comment.user._id === currentUser.sub" class="pointer size" ng-click="editComment(comment)">
+		                <i class="ion-edit icon_edit"></i>
+		              </a>
+									 &nbsp;&nbsp;
+		              <a ng-if="comment.user._id === currentUser.sub" class="pointer size" ng-click="deleteComment(comment)">
+		                <i class="ion-trash-a icon_remove"></i>
+		              </a>
+								</div>
 							</div>
 							<figure  class="left">
-								<img ng-src="{{comment.author.image}}" alt="candidato" class="comments-avatar">
+								<img ng-src="{{comment.user.image.url}}" alt="user" class="comments-avatar">
 							</figure>
-							<small><strong>{{comment.author.name}}</strong> dice: </small>
+							<small><strong>{{comment.user.displayName}}</strong> dice: </small>
 							<p>{{comment.content}}</p>
 	        		<div class="signup-or-separator"><hr></div>
 						</div>
-					  <div ng-if="!postSelected.comments.length" class="alert alert-info text-center">
+					  <div ng-if="!comments.length" class="alert alert-info text-center">
 					    Aún no hay comentarios, se el primero en comentar.
 					  </div>
 					</div>
-					<form method="post" ng-submit="newComment()" name="comentForm" class="margin-up ng-pristine ng-invalid ng-invalid-required">
+					<form method="post" ng-if="!formEdit" ng-submit="newComment()" name="comentForm" class="margin-up ng-pristine ng-invalid ng-invalid-required">
 						<div class="form-group">
 						<label for="content" class="control-label">Escribe tu comentario:</label>
-							<textarea name="content" rows="4" class="form-control ng-pristine ng-invalid ng-invalid-required" ng-model="content" required></textarea>
+							<textarea name="content" rows="4" class="form-control ng-pristine ng-invalid ng-invalid-required" ng-model="addComment.content" required></textarea>
 						</div>
 						<div class="text-center">
 							<button type="submit"  class="btn btn-lg btn-primary" ng-disabled="comentForm.$invalid">Comentar</button>
+						</div>
+					</form>
+					<form method="post" ng-if="formEdit" ng-submit="updateComment()" name="updateComentForm" class="margin-up ng-pristine ng-invalid ng-invalid-required">
+						<div class="form-group">
+						<label for="content" class="control-label">Editar comentario:</label>
+							<textarea name="content" rows="4" class="form-control ng-pristine ng-invalid ng-invalid-required" ng-model="commentEdit.content" required></textarea>
+						</div>
+						<div class="text-center">
+							<button type="submit"  class="btn btn-lg btn-warning" ng-disabled="updateComentForm.$invalid">Actualizar</button>
 						</div>
 					</form>
 				</div>

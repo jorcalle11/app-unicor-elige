@@ -8,12 +8,20 @@
    * Controller of the unicorEligeApp
    */
   angular.module('unicorEligeApp')
+    .filter('startFrom',function(){
+      return function(data, start){
+        start = 0 + start;
+        return data.slice(start);
+      };
+    })
     .controller('AdminCtrl',['$scope','$state','toastr','Candidates','Users','Unicor',function ($scope,$state,toastr,Candidates,Users,Unicor){
 
       $scope.users = [];
       $scope.candidates = [];
       $scope.faculties = Unicor.faculty;
       $scope.semesters = Unicor.semester;
+      $scope.pageSize= 8;
+      $scope.currentPage = 1;
 
       $scope.loadCandidates = function(){
         Candidates.allCandidates().then(function(response){
@@ -47,6 +55,7 @@
           $scope.users = response;
         });
       };
+
 
       $scope.addUser = function() {
         Users.add($scope.newUser).then(function(response){

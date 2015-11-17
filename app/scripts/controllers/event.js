@@ -55,7 +55,7 @@
             }
           }
         });
-        modalViewEvent.result.then(function (eventoOk) {
+        modalViewEvent.result.then(function () {
           console.log('Modal dismissed at: ' + new Date());
         }, function () {
           console.log('Modal dismissed at: ' + new Date());
@@ -134,7 +134,7 @@
       $scope.viewEventClicked = evClicked;
   	  $scope.viewEventClicked.start = moment(evClicked.start).format();
 
-      $scope.ok = function (action){
+      $scope.ok = function (){
   	    $modalInstance.close();
   	  };
 

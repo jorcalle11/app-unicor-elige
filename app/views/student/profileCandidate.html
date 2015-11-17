@@ -7,9 +7,9 @@
 			<div class="panel-body text-center">
 				<img src="" alt="avatar" ng-src="{{candidateSelected.user.image.url}}" class="candidate-avatar">
 				<h1>#{{candidateSelected.cardNumber}}</h1>
-				<h4 class="green-light">{{candidateSelected.watchword}}</h4>
-				<h3 class="name">{{candidateSelected.user.displayName}}</h3>
-				<p >{{candidateSelected.user.program}}</p>
+				<h4 class="green-light margin-down">{{candidateSelected.watchword}}</h4>
+				<h2 class="name">{{candidateSelected.user.displayName}}</h2>
+				<p class="margin-down">{{candidateSelected.user.program}}</p>
 				<div ng-if="candidateSelected.biography" class="margin-up">
 		    	<small class="cursive">
 		    		<span class="ion-quote"></span>
@@ -17,15 +17,31 @@
 	    			<span class="ion-quote rotate"></span>
 		    	</small>
 				</div>
-        <div class="signup-or-separator"><hr></div>
-		    <div class="margin-down text-center">
-		    	<h3>Redes sociales</h3>
-			    <ul class="social-network">
-			      <li><a href="#" class="icoFacebook" title="facebook"><i class="ion-social-facebook"></i></a></li>
-			      <li><a href="#" class="icoTwitter" title="Twitter"><i class="ion-social-twitter"></i></a></li>
-			      <li><a href="#" class="icoGoogle" title="Google +"><i class="ion-social-googleplus"></i></a></li>
-			    </ul>
-		    </div>
+    		<div ng-if="candidateSelected.twitter.id || candidateSelected.instagram.id || candidateSelected.facebook.id" class="margin-down text-center">
+    			<div class="signup-or-separator"><hr></div>
+    			<h3 class="text-center">Redes Sociales</h3>
+	        <a href="https://facebook.com/{{candidateSelected.facebook.id}}" ng-if="candidateSelected.facebook.id"	class="btn btn-block btn-facebook text-center" target="_blank" >
+    				<figure class="left">
+    					<img class="social-avatar" src="" alt="{{candidateSelected.facebook.username}}" title="{{candidateSelected.facebook.username}}" ng-src="{{candidateSelected.facebook.photo}}">
+    				</figure>
+  					<span class="ion-social-facebook" style="font-size:3em"></span>
+  					<p>{{candidateSelected.facebook.username}}</p>
+	        </a>
+	        <a href="https://twitter.com/{{candidateSelected.twitter.username}}"	ng-if="candidateSelected.twitter.id" class="btn btn-block btn-twitter text-center" target="_blank" >
+    				<figure class="left">
+    					<img class="social-avatar" src="" alt="{{candidateSelected.twitter.username}}" title="{{candidateSelected.twitter.username}}" ng-src="{{candidateSelected.twitter.photo}}">
+    				</figure>
+  					<span class="ion-social-twitter" style="font-size:3em"></span>
+  					<p><span class="ion-at"></span>{{candidateSelected.twitter.username}}</p>
+	        </a>
+	        <a href="https://instagram.com/{{candidateSelected.instagram.username}}"	ng-if="candidateSelected.instagram.id" class="btn btn-block btn-instagram text-center" target="_blank" >
+    				<figure class="left">
+    					<img class="social-avatar" src="" alt="{{candidateSelected.instagram.username}}" title="{{candidateSelected.instagram.username}}" ng-src="{{candidateSelected.instagram.photo}}">
+    				</figure>
+  					<span class="ion-social-instagram" style="font-size:3em"></span>
+  					<p></span>{{candidateSelected.instagram.username}}</p>
+	        </a>
+    		</div>
 			</div>
 		</div>
 	</aside>
@@ -92,7 +108,7 @@
 						<div>
 							<small class="color-olive-light">{{post.created | date:'mediumDate' }}</small>
 							<div class="pull-right ">
-								{{post.comments.length}}
+								{{post.numComments}}
 								<span class="ion-chatbubbles"></span>
 							</div>
 						</div>

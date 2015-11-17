@@ -1,0 +1,26 @@
+<div class="container-fluid text-center" ng-init="loadCandidates(); getUser()">
+	<h1>Encuesta</h1>
+	<h3 class="">¿Si hoy fueran las elecciones, por cual candidato votarías?</h3>
+	<div class="content margin-up">
+		<div ng-if="!currentUser.votation" class="card-copy" ng-repeat="candidate in candidates | orderBy: 'cardNumber'">
+			<div class="panel panel-success">
+			  <div class="panel-heading text-center">
+			  	{{candidate.user.displayName}}
+			  </div>
+			  <div class="panel-body">
+		      <figure class="text-center">
+		      	<img ng-src="{{candidate.user.image.url}}" alt="avatar" class="img-thumbnail" width="150">
+		      </figure>
+		      <h3>#{{candidate.cardNumber}}</h3>
+			  </div>
+			  <div class="panel-footer">
+			  	<button class="btn btn-block btn-lg btn-success" ng-click="votar(candidate)">Votar</button>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div ng-if="currentUser.votation" class="container">
+		<div google-chart chart="chartObject" style="height:600px; width:100%;"></div>
+	</div>
+</div>
+

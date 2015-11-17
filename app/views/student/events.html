@@ -1,7 +1,7 @@
 <div class="container-fluid" ng-init="loadEvents()">
 	<h1 class="margin-down text-center">Eventos</h1>
 	<div class="content margin-up text-center" >
-		<div class="post" ng-if="uEvents.length" ng-repeat="event in uEvents | orderBy:'start'| filter: filtro">
+		<div class="post" ng-if="uEvents.length" ng-repeat="event in uEvents | orderBy:'-start'| filter: filtro">
 			<div class="panel panel-warning">
 				<div class="panel-heading">
 					<h4>{{event.title}}</h4>

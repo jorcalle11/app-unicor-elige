@@ -1,3 +1,4 @@
+
 (function(){
   'use strict';
   /**
@@ -19,7 +20,8 @@
       'satellizer',
       'toastr',
       'ui.bootstrap',
-      'ui.calendar'
+      'ui.calendar',
+      'googlechart'
     ])
     .config(['$stateProvider','$urlRouterProvider','$authProvider','Api','Rol',function ($stateProvider,$urlRouterProvider,$authProvider,Api,Rol) {
 
@@ -139,9 +141,9 @@
             loginRequired: loginRequired
           }
         })
-        .state('perfil',{
-          url: '/perfil',
-          templateUrl:'views/candidate/perfil.html',
+        .state('propuestas',{
+          url: '/propuestas',
+          templateUrl:'views/candidate/propuestas.html',
           controller: 'CandidateCtrl',
           rol: Rol.candidate,
           resolve: {
@@ -179,6 +181,15 @@
           url: '/mis-posts/:postId',
           templateUrl:'views/candidate/readPost.html',
           controller: 'PostCtrl',
+          rol: Rol.candidate,
+          resolve: {
+            loginRequired: loginRequired
+          }
+        })
+        .state('poll',{
+          url:'/encuesta',
+          templateUrl:'views/candidate/poll.html',
+          controller:'ResultCtrl',
           rol: Rol.candidate,
           resolve: {
             loginRequired: loginRequired
@@ -230,10 +241,31 @@
             loginRequired: loginRequired
           }
         })
-      $authProvider.loginUrl = Api.url+'users/login';
+        .state('results',{
+          url:'/resultados',
+          templateUrl:'views/student/results.html',
+          controller:'ResultCtrl',
+          rol: Rol.student,
+          resolve: {
+            loginRequired: loginRequired
+          }
+        });
+
+      $authProvider.facebook({
+        clientId: '1683495401866770'
+      });
+      $authProvider.instagram({
+        clientId: 'bd39c18aa6ef4403ab506022691e1445'
+      });
+      $authProvider.twitter({
+        url: '/auth/twitter'
+      });
+
+      $authProvider.loginUrl = Api.url+'auth/login';
       $authProvider.signupUrl = Api.url+'users/signup';
       $authProvider.tokenName = 'token';
       $authProvider.tokenPrefix = 'UnicorElige';
+
     }])
     .run(function ($rootScope, $auth, toastr){
       $rootScope.$on('$stateChangeStart',function (event, toState){

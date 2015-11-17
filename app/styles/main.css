@@ -20,8 +20,14 @@ ul >li {
 .btn {
   border-radius: 2px;
 }
+.row{
+  margin-top: -30px;
+}
 .text-right{
   text-align: right;
+}
+.float-none {
+  float: none;
 }
 .left {
   float: left;
@@ -34,7 +40,7 @@ ul >li {
   margin-bottom: 2em;
 }
 .margin-up {
-  margin-top: .5em;
+  margin-top: 2em;
 }
 .margin-right {
   margin-right: 0.7em;
@@ -44,6 +50,9 @@ ul >li {
 }
 .pointer {
   cursor: pointer;
+}
+.cursive {
+  font-style: italic;
 }
 .size{
   font-size: 1.5em;
@@ -72,13 +81,51 @@ ul >li {
   -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
   -ms-transform: rotate(180deg); /* IE 9 */
 }
-
 .card{
   display: inline-block;
   padding: .5em;
   margin: 0 2% 1em 0;
   vertical-align: top;
   width: 31%;
+}
+.card-copy{
+  display: inline-block;
+  margin: 0 2% 1em 0;
+  width: 25%;
+  vertical-align: top;
+}
+.width{
+  width: 47%;
+}
+.btn-facebook {
+  color: #fff;
+  background-color: #3b5998;
+  border: 1px solid #335190;
+}
+.btn-facebook:hover,
+.btn-facebook:focus {
+  color: #fff;
+  background-color: #294786;
+}
+.btn-twitter {
+  color: #fff;
+  background-color: #00aced;
+  border: 1px solid #009fdb;
+}
+.btn-twitter:hover,
+.btn-twitter:focus {
+  color: #fff;
+  background-color: #0090c7;
+}
+.btn-instagram {
+  color: #fff;
+  background-color: #3f729b;
+}
+
+.btn-instagram:hover,
+.btn-instagram:focus {
+  color: #fff;
+  background-color: #305777;
 }
 ul.social-network {
   font-size: 2em;
@@ -110,7 +157,7 @@ a.socialIcon:hover {
   padding-left: 15px;
   padding-right: 15px;
 }
-.container_copy>.jumbotron{
+.container >.jumbotron{
   background-color: white;
 }
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -186,9 +233,6 @@ a.socialIcon:hover {
 }
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  .container_copy {
-    max-width: 730px;
-  }
 
   /* Remove the padding we set earlier */
   .header,
@@ -202,4 +246,15 @@ a.socialIcon:hover {
     margin-bottom: 30px;
   }
 }
-
+@media screen and (max-width: 450px){
+  .center-form{
+    max-width: 300px;
+    margin: auto;
+  }
+  .center {
+    text-align: center;
+  }
+  .float-none{
+    float: none;
+  }
+}

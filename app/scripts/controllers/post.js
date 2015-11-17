@@ -8,9 +8,12 @@
  * Controller of the unicorEligeApp
  */
 angular.module('unicorEligeApp')
-  .controller('PostCtrl',['$rootScope','$scope','$state','$stateParams','toastr','Posts',function ($rootScope,$scope,$state,$stateParams,toastr,Posts){
+  .controller('PostCtrl',['$rootScope','$scope','$state','$stateParams','toastr','Posts','Comments',function ($rootScope,$scope,$state,$stateParams,toastr,Posts,Comments){
 
     $scope.posts = [];
+    $scope.addComment = {};
+    $scope.pageSize = 6;
+    $scope.currentPage = 1;
 
     $scope.myPosts = function(){
       Posts.myPosts().then(function(response){
@@ -39,7 +42,6 @@ angular.module('unicorEligeApp')
     };
 
     $scope.removePost = function(post){
-      console.log('si si si');
       Posts.remove(post._id).then(function(){
         $scope.posts.forEach(function(postToTrash, index){
           if(postToTrash === post){
@@ -50,18 +52,52 @@ angular.module('unicorEligeApp')
       });
     };
 
+    $scope.loadComments = function(){
+      Comments.getComments($stateParams.postId).then(function(response){
+        $scope.comments = response;
+      });
+    };
+
     $scope.newComment = function(){
-      $scope.comment = {
-        created: Date.now(),
-        content: $scope.content,
-        author: {
-          name : $rootScope.currentUser.displayName,
-          image: $rootScope.currentUser.image.url
-        }
-      };
-      Posts.addComment($stateParams.postId, $scope.comment).then(function(){
-        $scope.currentPost.comments.push($scope.comment);
-        $scope.content = '';
+      $scope.addComment.created = Date.now();
+      $scope.addComment.post = $stateParams.postId;
+
+      Comments.add($scope.addComment).then(function(response){
+        response.user = {},
+        response.user._id = $rootScope.currentUser.sub;
+        response.user.displayName = $rootScope.currentUser.displayName;
+        response.user.image = $rootScope.currentUser.image;
+        $scope.comments.push(response);
+        $scope.addComment = {};
+      });
+    };
+
+    $scope.deleteComment = function(comment){
+      Comments.remove(comment._id).then(function(){
+        $scope.comments.map(function(result,index){
+          if (result._id === comment._id) {
+            $scope.comments.splice(index,1);
+          }
+        });
+      });
+    };
+
+    $scope.editComment = function(comment){
+      $scope.formEdit = true;
+      $scope.commentEdit = comment;
+    };
+
+    $scope.updateComment = function(){
+      $scope.commentEdit.edited = Date.now();
+      Comments.update($scope.commentEdit).then(function(){
+        $scope.comments.map(function(comment){
+          if (comment.id === $scope.commentEdit.id) {
+            comment = $scope.commentEdit;
+          }
+        });
+        $scope.commentEdit = {};
+        $scope.formEdit = false;
+        toastr.info('comentario editado');
       });
     };
   }]);
